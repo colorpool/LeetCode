@@ -1,0 +1,21 @@
+<script>
+  var characterReplacement = function (s, k) {
+    let N = s.length;
+    let count = new Array(26).fill(0);
+    let left = 0,
+      res = 0;
+    for (let i = 0; i < N; i++) {
+      count[s.charCodeAt(i) - "A".charCodeAt(0)]++;
+      while (i - left + 1 - findMax(count) > k) {
+        count[s.charCodeAt(left) - "A".charCodeAt(0)]--;
+        left++;
+      }
+      res = Math.max(res, i - left + 1);
+    }
+    return res;
+  };
+
+  function findMax(count) {
+    return Math.max(...count);
+  }
+</script>
